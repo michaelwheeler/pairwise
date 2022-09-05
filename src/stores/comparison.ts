@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
-
-type Vote = [string, string];
+import type { Vote } from "@/lib/pairwise";
 
 interface State {
   candidates: string[];
