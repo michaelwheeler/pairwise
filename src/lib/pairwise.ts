@@ -152,6 +152,9 @@ export function maxNewVotes(ballot: Vote, votes: Vote[]) {
  */
 export function nextBallot(candidates: string[], votes: Vote[]) {
   const remaining = remainingPairs(candidates, votes);
+  if (!remaining) {
+    return null;
+  }
   const minVotes = _.curryRight(minNewVotes)(votes);
   const maxVotes = _.curryRight(maxNewVotes)(votes);
   const options = _.sortBy(remaining, [minVotes, maxVotes]);
