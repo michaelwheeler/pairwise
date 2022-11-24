@@ -1,6 +1,11 @@
 import { defineStore } from "pinia";
 import type { Vote } from "@/lib/pairwise";
-import { nextBallot, updateVotes } from "@/lib/pairwise";
+import {
+  getRanking,
+  nextBallot,
+  remainingPairs,
+  updateVotes,
+} from "@/lib/pairwise";
 
 interface State {
   candidates: string[];
@@ -29,6 +34,13 @@ export const useComparisonStore = defineStore("comparison", {
     },
     candidateTwo(): string {
       return this.nextBallot ? this.nextBallot[1] : "";
+    },
+    results(state) {
+      const votesRemaining = remainingPairs(state.candidates, state.votes);
+      if (votesRemaining.length) {
+        return [];
+      }
+      return getRanking(state.candidates, state.votes);
     },
   },
 });
