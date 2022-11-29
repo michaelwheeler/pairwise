@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 18
       - run: npm ci
-      - run: npm run build -- --base=/pairwise/
+      - run: npm run build-only -- --base=/pairwise/
       - uses: actions/upload-pages-artifact@v1
         with:
           path: ./dist
